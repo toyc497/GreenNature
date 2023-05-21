@@ -21,11 +21,11 @@ public class ProjetoReflorestamento {
 	private Long id;
 	
 	@Column(name="titulo", unique=true)
-	@Size(min=2, max=20)
+	@Size(min=2, max=50)
 	private String titulo;
 	
 	@Column(name="descricao")
-	@Size(min=2, max=40)
+	@Size(min=2, max=100)
 	private String descricao;
 	
 	@Column(name="data_hora_evento")
