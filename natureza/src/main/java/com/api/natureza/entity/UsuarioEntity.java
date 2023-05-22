@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,13 +15,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="usuario")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class UsuarioEntity {
 
 	@Id
@@ -42,8 +43,9 @@ public class UsuarioEntity {
 	@NotBlank
 	private String tipoUsuario;
 	
-	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-	private ParqueEntity parque;
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<ParqueEntity> parque = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
 	@JsonIgnore
@@ -69,7 +71,7 @@ public class UsuarioEntity {
 		return tipoUsuario;
 	}
 
-	public ParqueEntity getParque() {
+	public List<ParqueEntity> getParque() {
 		return parque;
 	}
 
@@ -97,7 +99,7 @@ public class UsuarioEntity {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	public void setParque(ParqueEntity parque) {
+	public void setParque(List<ParqueEntity> parque) {
 		this.parque = parque;
 	}
 

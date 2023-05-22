@@ -2,6 +2,8 @@ package com.api.natureza.entity;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="projetoreflorestamento")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class ProjetoReflorestamento {
 
 	@Id

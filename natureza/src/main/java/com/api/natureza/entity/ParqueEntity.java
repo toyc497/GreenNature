@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,14 +14,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name="parque")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class ParqueEntity {
 
 	@Id
@@ -38,7 +40,7 @@ public class ParqueEntity {
 	@Column(name="funcionando")
 	private boolean funcionando;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name="usuario_id")
 	private UsuarioEntity usuario;
 	
